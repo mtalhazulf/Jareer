@@ -26,6 +26,7 @@ export class ChatService {
 
   findOneChat(chatId: string): Chat {
     const chat = this.chats.find(chat => chat.chatId === chatId);
+    console.log(this.chats);
     if (!chat) {
       throw new NotFoundException(`Chat with ID ${chatId} not found`);
     }

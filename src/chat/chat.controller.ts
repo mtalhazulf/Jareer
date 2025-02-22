@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Put, Delete, HttpCode } from '@nest
 import { ChatService } from './chat.service';
 import { CreateChatDto, UpdateChatDto, CreateMessageDto, UpdateMessageDto } from './dto/chat.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { markdownResponse } from './markdown';
 
 @ApiTags('Chat System')
 @Controller()
@@ -68,7 +69,7 @@ export class ChatController {
     });
     return {
       ...message,
-      markdownResponse: this.chatService.generateMarkdownResponse(message)
+      markdownResponse: markdownResponse
     };
   }
 
