@@ -16,6 +16,7 @@ exports.ChatController = void 0;
 const common_1 = require("@nestjs/common");
 const chat_service_1 = require("./chat.service");
 const chat_dto_1 = require("./dto/chat.dto");
+const swagger_1 = require("@nestjs/swagger");
 let ChatController = class ChatController {
     constructor(chatService) {
         this.chatService = chatService;
@@ -69,6 +70,9 @@ let ChatController = class ChatController {
 exports.ChatController = ChatController;
 __decorate([
     (0, common_1.Post)('chats'),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new chat' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Chat has been created successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request.' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [chat_dto_1.CreateChatDto]),
@@ -76,12 +80,18 @@ __decorate([
 ], ChatController.prototype, "createChat", null);
 __decorate([
     (0, common_1.Get)('chats'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all chats' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Return all chats.' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ChatController.prototype, "findAllChats", null);
 __decorate([
     (0, common_1.Get)('chats/:chatId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get a specific chat' }),
+    (0, swagger_1.ApiParam)({ name: 'chatId', description: 'ID of the chat' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Return the chat.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Chat not found.' }),
     __param(0, (0, common_1.Param)('chatId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -89,6 +99,10 @@ __decorate([
 ], ChatController.prototype, "findOneChat", null);
 __decorate([
     (0, common_1.Put)('chats/:chatId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update a chat' }),
+    (0, swagger_1.ApiParam)({ name: 'chatId', description: 'ID of the chat to update' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Chat has been updated successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Chat not found.' }),
     __param(0, (0, common_1.Param)('chatId')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -97,6 +111,10 @@ __decorate([
 ], ChatController.prototype, "updateChat", null);
 __decorate([
     (0, common_1.Delete)('chats/:chatId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a chat' }),
+    (0, swagger_1.ApiParam)({ name: 'chatId', description: 'ID of the chat to delete' }),
+    (0, swagger_1.ApiResponse)({ status: 204, description: 'Chat has been deleted successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Chat not found.' }),
     (0, common_1.HttpCode)(204),
     __param(0, (0, common_1.Param)('chatId')),
     __metadata("design:type", Function),
@@ -105,6 +123,10 @@ __decorate([
 ], ChatController.prototype, "removeChat", null);
 __decorate([
     (0, common_1.Post)('chats/:chatId/messages'),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new message in a chat' }),
+    (0, swagger_1.ApiParam)({ name: 'chatId', description: 'ID of the chat to add the message to' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Message has been created successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Chat not found.' }),
     __param(0, (0, common_1.Param)('chatId')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -113,6 +135,10 @@ __decorate([
 ], ChatController.prototype, "createMessage", null);
 __decorate([
     (0, common_1.Get)('chats/:chatId/messages'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all messages in a chat' }),
+    (0, swagger_1.ApiParam)({ name: 'chatId', description: 'ID of the chat' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Return all messages in the chat.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Chat not found.' }),
     __param(0, (0, common_1.Param)('chatId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -120,6 +146,10 @@ __decorate([
 ], ChatController.prototype, "findAllMessages", null);
 __decorate([
     (0, common_1.Get)('messages/:messageId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get a specific message' }),
+    (0, swagger_1.ApiParam)({ name: 'messageId', description: 'ID of the message' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Return the message.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Message not found.' }),
     __param(0, (0, common_1.Param)('messageId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -127,6 +157,10 @@ __decorate([
 ], ChatController.prototype, "findOneMessage", null);
 __decorate([
     (0, common_1.Put)('messages/:messageId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update a message' }),
+    (0, swagger_1.ApiParam)({ name: 'messageId', description: 'ID of the message to update' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Message has been updated successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Message not found.' }),
     __param(0, (0, common_1.Param)('messageId')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -135,6 +169,10 @@ __decorate([
 ], ChatController.prototype, "updateMessage", null);
 __decorate([
     (0, common_1.Delete)('messages/:messageId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a message' }),
+    (0, swagger_1.ApiParam)({ name: 'messageId', description: 'ID of the message to delete' }),
+    (0, swagger_1.ApiResponse)({ status: 204, description: 'Message has been deleted successfully.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Message not found.' }),
     (0, common_1.HttpCode)(204),
     __param(0, (0, common_1.Param)('messageId')),
     __metadata("design:type", Function),
@@ -142,6 +180,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ChatController.prototype, "removeMessage", null);
 exports.ChatController = ChatController = __decorate([
+    (0, swagger_1.ApiTags)('Chat System'),
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [chat_service_1.ChatService])
 ], ChatController);
